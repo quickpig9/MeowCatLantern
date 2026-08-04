@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generator Superflat World - Minecraft</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/quickpig9/MeowCatLantern/refs/heads/main/Ikon.png">
 </head>
 <body>
 
     <div class="container">
         <!-- Przycisk powrotu na samej górze -->
         <div class="back-home-container">
-            <a href="https://quickpig9.github.io/MeowCatLantern/" id="ui-back-btn" class="back-btn">&larr; Powrót do strony głównej</a>
+            <a href="https://quickpig9.github.io/MeowCatLantern/" id="ui-back-btn" class="back-btn">&larr; Back to home page</a>
         </div>
 
         <div class="top-bar">
-            <h1 id="ui-title">Generator Superflat World</h1>
+            <h1 id="ui-title">Superflat World Generator</h1>
             <select id="langSelect" class="lang-select">
                 <option value="pl">PL</option>
                 <option value="en">USA</option>
@@ -27,30 +26,30 @@
                 <option value="es">ES</option>
             </select>
         </div>
-        <p class="subtitle" id="ui-subtitle">Stwórz własny kod świata płaskiego dla Minecraft (Java Edition)</p>
+        <p class="subtitle" id="ui-subtitle">Create your own flat world code for Minecraft (Java Edition)</p>
 
         <!-- Warstwy świata -->
         <div class="section">
-            <h3 id="ui-layers-title">Warstwy świata (od dołu do góry)</h3>
+            <h3 id="ui-layers-title">World Layers (bottom to top)</h3>
             <div id="layersContainer" class="layers-list">
                 <!-- Generowane dynamicznie -->
             </div>
             <div class="add-layer-container">
-                <button onclick="addLayer()" id="ui-add-layer">Dodaj warstwę</button>
-                <span id="maxBlocksText" class="max-blocks-text">Max blocks</span>
+                <button onclick="addLayer()" id="ui-add-layer">Add Layer</button>
+                <span id="maxBlocksText" class="max-blocks-text">Max blocks reached</span>
             </div>
         </div>
 
         <!-- Biom -->
         <div class="section">
-            <h3 id="ui-biome-title">Ustawienia biomu</h3>
+            <h3 id="ui-biome-title">Biome Settings</h3>
             <div style="display: flex; flex-direction: column; gap: 8px;">
-                <input type="text" id="biomeSearch" placeholder="Wyszukaj biom...">
+                <input type="text" id="biomeSearch" placeholder="Search biome...">
                 <select id="biomeSelect" style="width: 100%; background: var(--bg-color); color: var(--text); border: 1px solid var(--border); padding: 8px; border-radius: 6px;">
                     <option value="minecraft:the_void">minecraft:the_void</option>
-                    <option value="minecraft:plains">minecraft:plains (Równiny)</option>
-                    <option value="minecraft:desert">minecraft:desert (Pustynia)</option>
-                    <option value="minecraft:forest">minecraft:forest (Las)</option>
+                    <option value="minecraft:plains">minecraft:plains</option>
+                    <option value="minecraft:desert">minecraft:desert</option>
+                    <option value="minecraft:forest">minecraft:forest</option>
                     <option value="minecraft:nether_wastes">minecraft:nether_wastes</option>
                     <option value="minecraft:the_end">minecraft:the_end</option>
                     <option value="minecraft:ocean">minecraft:ocean</option>
@@ -60,11 +59,17 @@
 
         <!-- Wynik -->
         <div class="section">
-            <h3 id="ui-output-title">Wygenerowany kod</h3>
+            <h3 id="ui-output-title">Generated Code</h3>
             <div id="output" class="output-box"></div>
             <div class="actions">
-                <button onclick="copyCode()" id="ui-copy-btn" style="flex-grow: 1;">Skopiuj kod</button>
+                <button onclick="copyCode()" id="ui-copy-btn" style="flex-grow: 1;">Copy Code</button>
             </div>
+        </div>
+
+        <!-- Stopka -->
+        <div class="footer" style="text-align: center; margin-top: 30px; border-top: 1px solid var(--border); padding-top: 15px; color: var(--text-muted);">
+            <img src="Ikon.png" alt="MeowCatLantern Footer Icon" class="footer-icon" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 8px;">
+            <p style="display: inline; margin: 0;">MeowCatLantern Project</p>
         </div>
     </div>
 
