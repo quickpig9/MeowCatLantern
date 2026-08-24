@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/quickpig9/MeowCatLantern/refs/heads/main/Ikon.png">
+    <title>Roblox Users ID with Headshot</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            background-color: #121212;
+            color: #e0e0e0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #007acc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #3399ff;
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        p.description-text {
+            color: #a0a0a0;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 15px;
+            background-color: #2a2a2a;
+            border: 2px solid #3d3d3d;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007acc;
+            background-color: #2d2d2d;
+        }
+
+        button {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #005999;
+        }
+
+        button:disabled {
+            background-color: #444;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        #resultArea {
+            margin-top: 10px;
+            padding: 20px;
+            background-color: #252526;
+            border-radius: 12px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid #333;
+        }
+
+        #avatarHeadshot {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #007acc;
+            background-color: #1a1a1a;
+            object-fit: cover;
+            display: none;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .display-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .username {
+            font-size: 14px;
+            color: #007acc;
+        }
+
+        .user-id {
+            font-size: 13px;
+            color: #888888;
+        }
+
+        .banned-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+
+        .banned-true {
+            background-color: rgba(255, 82, 82, 0.2);
+            color: #ff5252;
+            border: 1px solid #ff5252;
+        }
+
+        .banned-false {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            border: 1px solid #4caf50;
+        }
+
+        .bio-box {
+            background-color: #1e1e1e;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #cccccc;
+            max-height: 100px;
+            overflow-y: auto;
+            text-align: left;
+            word-break: break-word;
+            border: 1px solid #333;
+            margin-top: 6px;
+        }
+
+        .meta-info {
+            font-size: 12px;
+            color: #aaaaaa;
+            margin-top: 4px;
+        }
+
+        .profile-btn {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 10px 16px;
+            background-color: #2e7d32;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.2s ease;
+        }
+
+        .profile-btn:hover {
+            background-color: #1b5e20;
+        }
+
+        .error-text {
+            color: #ff5252 !important;
+            font-weight: 500;
+        }
+
+        /* Footer MeowCatLantern */
+        .footer-project {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #888888;
+        }
+
+        .footer-project img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Back Link -->
+        <a href="https://quickpig9.github.io/MeowCatLantern/" class="back-link">&larr; Back to home page</a>
+
+        <h1>Roblox Users ID</h1>
+        <p class="description-text">Enter a numeric Roblox User ID<br>to view user details and Avatar Headshot.</p>
+
+        <div class="input-group">
+            <input type="text" id="userInput" inputmode="numeric" placeholder="User ID" autocomplete="off" maxlength="18">
+            <button id="searchBtn">Search</button>
+        </div>
+
+        <div id="resultArea">
+            <img id="avatarHeadshot" src="" alt="Roblox Avatar Headshot">
+            <div class="user-info">
+                <div id="displayName" class="display-name"></div>
+                <div id="username" class="username"></div>
+                <div id="userIdDisplay" class="user-id"></div>
+                
+                <div>
+                    <span id="bannedBadge" class="banned-badge"></span>
+                </div>
+
+                <div id="createdDate" class="meta-info"></div>
+
+                <div id="bioBox" class="bio-box" style="display: none;"></div>
+
+                <a id="profileLink" href="#" target="_blank" class="profile-btn" style="display: none;">Open Web Profile</a>
+            </div>
+            <div id="statusText"></div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-project">
+            <img src="https://raw.githubusercontent.com/quickpig9/MeowCatLantern/refs/heads/main/Ikon.png" alt="Icon">
+            <span>MeowCatLantern Project</span>
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById('userInput');
+        const button = document.getElementById('searchBtn');
+        const resultArea = document.getElementById('resultArea');
+        const avatarImg = document.getElementById('avatarHeadshot');
+        const displayNameEl = document.getElementById('displayName');
+        const usernameEl = document.getElementById('username');
+        const userIdDisplayEl = document.getElementById('userIdDisplay');
+        const bannedBadgeEl = document.getElementById('bannedBadge');
+        const createdDateEl = document.getElementById('createdDate');
+        const bioBoxEl = document.getElementById('bioBox');
+        const profileLinkEl = document.getElementById('profileLink');
+        const statusText = document.getElementById('statusText');
+
+        input.addEventListener('input', () => {
+            input.value = input.value.replace(/[^0-9]/g, '');
+        });
+
+        async function performSearch() {
+            const userId = input.value.trim();
+
+            // Reset UI state
+            resultArea.style.display = 'none';
+            avatarImg.style.display = 'none';
+            avatarImg.src = '';
+            displayNameEl.textContent = '';
+            usernameEl.textContent = '';
+            userIdDisplayEl.textContent = '';
+            bannedBadgeEl.style.display = 'none';
+            createdDateEl.textContent = '';
+            bioBoxEl.style.display = 'none';
+            bioBoxEl.textContent = '';
+            profileLinkEl.style.display = 'none';
+            statusText.textContent = '';
+            statusText.className = '';
+
+            if (userId === '') {
+                showError('Please enter a User ID.');
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = 'Searching...';
+
+            try {
+                // Fetch profile data from v1/users/[ID]
+                const userApiUrl = `https://users.roproxy.com/v1/users/${userId}`;
+                const userResponse = await fetch(userApiUrl);
+
+                if (!userResponse.ok) {
+                    if (userResponse.status === 404) {
+                        showError('User with this ID does not exist.');
+                    } else {
+                        showError('Error fetching user data.');
+                    }
+                    return;
+                }
+
+                const userData = await userResponse.json();
+
+                // Basic details
+                displayNameEl.textContent = userData.displayName;
+                usernameEl.textContent = `@${userData.name}`;
+                userIdDisplayEl.textContent = `ID: ${userData.id}`;
+
+                // Banned status (isBanned)
+                bannedBadgeEl.style.display = 'inline-block';
+                if (userData.isBanned) {
+                    bannedBadgeEl.textContent = 'BANNED';
+                    bannedBadgeEl.className = 'banned-badge banned-true';
+                } else {
+                    bannedBadgeEl.textContent = 'ACTIVE';
+                    bannedBadgeEl.className = 'banned-badge banned-false';
+                }
+
+                // Creation date (created)
+                if (userData.created) {
+                    const date = new Date(userData.created);
+                    createdDateEl.textContent = `Created: ${date.toLocaleDateString('en-US')} ${date.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'})}`;
+                }
+
+                // Bio / Description
+                if (userData.description && userData.description.trim() !== '') {
+                    bioBoxEl.textContent = userData.description;
+                    bioBoxEl.style.display = 'block';
+                } else {
+                    bioBoxEl.textContent = 'No description provided.';
+                    bioBoxEl.style.display = 'block';
+                }
+
+                // "Open Web Profile" button
+                profileLinkEl.href = `https://www.roblox.com/users/${userData.id}/profile`;
+                profileLinkEl.style.display = 'inline-block';
+
+                // Fetch Avatar Headshot from thumbnails API
+                const headshotApiUrl = `https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=${userId}&size=150x150&format=Png&isCircular=true`;
+                const headshotResponse = await fetch(headshotApiUrl);
+
+                if (headshotResponse.ok) {
+                    const headshotResult = await headshotResponse.json();
+                    if (headshotResult.data && headshotResult.data.length > 0) {
+                        const avatarData = headshotResult.data[0];
+                        if (avatarData.state === 'Completed' && avatarData.imageUrl) {
+                            avatarImg.src = avatarData.imageUrl;
+                            avatarImg.style.display = 'block';
+                        }
+                    }
+                }
+
+                resultArea.style.display = 'flex';
+
+            } catch (error) {
+                console.error('Search Error:', error);
+                showError('Connection error. Please check your internet connection.');
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Search';
+            }
+        }
+
+        function showError(message) {
+            statusText.textContent = message;
+            statusText.className = 'error-text';
+            resultArea.style.display = 'flex';
+            avatarImg.style.display = 'none';
+            button.disabled = false;
+            button.textContent = 'Search';
+        }
+
+        button.addEventListener('click', performSearch);
+
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    </script>
+
+</body>
+</html>
